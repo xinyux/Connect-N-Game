@@ -1,15 +1,16 @@
-//
-//  main.cpp
-//  Project3Version4
-//
-//  Created by Xinyu Xie on 6/18/17.
-//  Copyright © 2017 Olivia. All rights reserved.
-//
+// main.cpp
 
+#include "provided.h"
+#include <string>
 #include <iostream>
+using namespace std;
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
+int main()
+{
+    SmartPlayer smart1("smart1");
+    HumanPlayer human1("human1");
+    Game g1(4, 4, 3, &human1, &smart1);
+    g1.play();
+    
+
 }

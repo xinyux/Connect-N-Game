@@ -6,6 +6,8 @@
 #include <vector>
 using namespace std;
 
+#define BIGNUMBER 100000
+
 class HumanPlayerImpl
 {
 public:
@@ -63,50 +65,49 @@ int SmartPlayerImpl::decideMove(Scaffold & grid, int N, int color, int depth, in
         int bestScore = INT_MIN;
         for (int col = 1; col <= grid.cols(); ++col) {
             if (grid.makeMove(col, color)) {
-                int score = bestScore;
+                int curScore = bestScore;
                 int gameStatus = winGame(grid, col, color, N);
                 if (gameStatus == 1) {
-                    score = INT_MAX - depth;
+                    curScore = BIGNUMBER - depth;
                 } else if (gameStatus == 0) {
-                    score = 0;
+                    curScore = 0;
                 } else {
-                    decideMove(grid, N, 1 - color, depth+1, score);
+                    decideMove(grid, N, 1 - color, depth+1, curScore);
                 }
-                if (score > bestScore) {
-                    bestScore = score;
+                if (curScore > bestScore) {
+                    bestScore = curScore;
                     res = col;
                 }
                 grid.undoMove();
             }
-            score = bestScore;
         }
-    
+        score = bestScore;
+        
     } else {
         
         int bestScore = INT_MAX;
         for (int col = 1; col <= grid.cols(); ++col) {
             if (grid.makeMove(col, color)) {
-                int score = bestScore;
+                int curScore = bestScore;
                 
                 int gameStatus = winGame(grid, col, color, N);
                 if (gameStatus == 1) {
-                    score = -(INT_MAX - depth);
+                    curScore = -(BIGNUMBER - depth);
                 } else if (gameStatus == 0) {
-                    score = 0;
+                    curScore = 0;
                 } else {
-                    decideMove(grid, N, 1 - color, depth+1, score);
+                    decideMove(grid, N, 1 - color, depth+1, curScore);
                 }
                 
-                if (score < bestScore) {
-                    bestScore = score;
+                if (curScore < bestScore) {
+                    bestScore = curScore;
                     res = col;
                 }
                 grid.undoMove();
             }
-            
         }
         score = bestScore;
-    
+        
     }
     
     return res;

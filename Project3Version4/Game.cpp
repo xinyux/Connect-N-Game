@@ -14,21 +14,20 @@ public:
     void play();
     int checkerAt(int c, int r) const;
     ~GameImpl() {
-        delete m_grid;
+//        delete m_grid;
     }
 private:
     Player * m_red, * m_black;
     int cur_player = RED, m_N;
-    Scaffold * m_grid;
+    unique_ptr<Scaffold> m_grid;
     bool m_haswinner = false;
     
     void haswinner(int lastmove, int color);
     bool inbound(int row, int col);
 };
 
-GameImpl::GameImpl(int nColumns, int nLevels, int N, Player* red, Player* black)
+GameImpl::GameImpl(int nColumns, int nLevels, int N, Player* red, Player* black) : m_grid(new Scaffold(nColumns, nLevels))
 {
-    m_grid = new Scaffold(nColumns, nLevels);
     m_red = red;
     m_black = black;
     m_N = N;

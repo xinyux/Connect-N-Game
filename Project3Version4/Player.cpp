@@ -25,7 +25,7 @@ public:
 private:
     int winGame(Scaffold & s, int lastMove, int color, int N);
     bool inbound(Scaffold & s, int row, int col);
-    int desideMove(Scaffold & grid, int N, int color, int depth, int & score);
+    int decideMove(Scaffold & grid, int N, int color, int depth, int & score);
 };
 
 int HumanPlayerImpl::chooseMove(const Scaffold& s, int N, int color)
@@ -53,10 +53,10 @@ int SmartPlayerImpl::chooseMove(const Scaffold& s, int N, int color)
 {
     Scaffold grid = s;
     int score = INT_MIN;
-    return desideMove(grid, N, color, 0, score);
+    return decideMove(grid, N, color, 0, score);
 }
 
-int SmartPlayerImpl::desideMove(Scaffold & grid, int N, int color, int depth, int & score) {
+int SmartPlayerImpl::decideMove(Scaffold & grid, int N, int color, int depth, int & score) {
     int res = 1;
     if (depth % 2 == 0) {
         
@@ -70,7 +70,7 @@ int SmartPlayerImpl::desideMove(Scaffold & grid, int N, int color, int depth, in
                 } else if (gameStatus == 0) {
                     score = 0;
                 } else {
-                    desideMove(grid, N, 1 - color, depth+1, score);
+                    decideMove(grid, N, 1 - color, depth+1, score);
                 }
                 if (score > bestScore) {
                     bestScore = score;
@@ -94,7 +94,7 @@ int SmartPlayerImpl::desideMove(Scaffold & grid, int N, int color, int depth, in
                 } else if (gameStatus == 0) {
                     score = 0;
                 } else {
-                    desideMove(grid, N, 1 - color, depth+1, score);
+                    decideMove(grid, N, 1 - color, depth+1, score);
                 }
                 
                 if (score < bestScore) {

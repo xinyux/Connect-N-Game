@@ -14,3 +14,11 @@ The program is able to
 -	Display updated scaffold after each move
 -	Support undo move
 -	Identify game result: winner or tie-game
+
+
+## EXAMPLE
+
+
+<p align="left">
+  <img src="https://github.com/xinyux/Connect-N-Game/blob/master/Project3Version4/example.jpeg" width="500" height="750"/>
+</p>

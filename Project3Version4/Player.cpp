@@ -34,10 +34,14 @@ int HumanPlayerImpl::chooseMove(const Scaffold& s, int N, int color)
 {
     Scaffold grid = s;
     int column;
-    do {
+    cout << "What column do you want to drop? (1 is the leftmost column) " << endl;
+    cin >> column;
+    while (!grid.makeMove(column, color)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "What column do you want to drop? (1 is the leftmost column) " << endl;
         cin >> column;
-    } while (!grid.makeMove(column, color));
+    }
     return column;
 }
 

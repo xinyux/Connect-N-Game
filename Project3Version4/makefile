@@ -11,7 +11,7 @@ LFLAGS = -Wall -std=c++11 $(DEBUG)
 # Generates debugging information that is used by gdb-based debuggers
 
 main: $(OBJS)
-	$(CC) -Wall -std=c++11 $(OBJS) -o main
+	$(CC) $(LFLAGS) $(OBJS) -o main
 
 main.o: main.cpp provided.h
 	$(CC) $(CFLAGS) main.cpp

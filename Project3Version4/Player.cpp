@@ -125,15 +125,26 @@ int SmartPlayerImpl::winGame(Scaffold & grid, int lastmove, int color, int N) {
     }
     
     for (int k = 0; k < direction.size(); k += 2) {
-        int deltarow = direction[k].first, deltacol = direction[k].second;
-        int row = i + deltarow, col = j + deltacol;
+        
+        int deltarow1 = direction[k].first, deltacol1 = direction[k].second;
+        int row = i + deltarow1, col = j + deltacol1;
         
         int cnt = 1;
         while (inbound(grid, row, col)) {
             if (grid.checkerAt(col, row) == color) {
                 cnt++;
-                col += deltacol;
-                row += deltarow;
+                col += deltacol1;
+                row += deltarow1;
+            } else break;
+        }
+        
+        int deltarow2 = direction[k+1].first, deltacol2 = direction[k+1].second;
+        row = i + deltarow2, col = j + deltacol2;
+        while (inbound(grid, row, col)) {
+            if (grid.checkerAt(col, row) == color) {
+                cnt++;
+                col += deltacol2;
+                row += deltarow2;
             } else break;
         }
         if (cnt >= N) {

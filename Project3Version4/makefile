@@ -1,17 +1,29 @@
-main: main.o Player.o Scaffold.o Game.o
-	g++ -Wall -std=c++11 main.o Player.o Scaffold.o Game.o -o main
+OBJS = main.o Player.o Scaffold.o Game.o
+CC = g++
+DEBUG = -g
+CFLAGS = -Wall -std=c++11 -c $(DEBUG)
+LFLAGS = -Wall -std=c++11 $(DEBUG)
+
+# -Wall 
+# Directs g++ to give warnings about code that’s probably in error
+
+# -g
+# Generates debugging information that is used by gdb-based debuggers
+
+main: $(OBJS)
+	$(CC) -Wall -std=c++11 $(OBJS) -o main
 
 main.o: main.cpp provided.h
-	g++ -Wall -std=c++11 -c main.cpp
+	$(CC) $(CFLAGS) main.cpp
 
 Player.o: Player.cpp provided.h
-	g++ -Wall -std=c++11 -c Player.cpp
+	$(CC) $(CFLAGS) Player.cpp
 
 Scaffold.o: Scaffold.cpp provided.h
-	g++ -Wall -std=c++11 -c Scaffold.cpp
+	$(CC) $(CFLAGS) Scaffold.cpp
 
-Game.o: Game.cpp provided.h
-	g++ -Wall  -std=c++11 -c Game.cpp
+Game.o: Game.cpp provided.h 
+	$(CC) $(CFLAGS) Game.cpp 
 
 clean:
-	-rm *.o
+	-rm *.o 

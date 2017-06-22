@@ -27,7 +27,7 @@ class ScaffoldImpl
 ScaffoldImpl::ScaffoldImpl(int nColumns, int nLevels)
 {
     if (nColumns <= 0 || nLevels<=0) {
-        cerr << "Columns and Levels Must be Positive!";
+        cerr << "Column and level Must be Positive!";
         exit(1);
     }
     
